@@ -1,0 +1,42 @@
+{
+  "name": "applicationinsights-native-metrics",
+  "description": "Native APM agent for the Application Insights NodeJS SDK",
+  "version": "0.0.1",
+  "contributors": [
+    {
+      "name": "Application Insights Developer Support",
+      "email": "aidevsupport@microsoft.com"
+    },
+    {
+      "name": "Application Insights SDK Maintainers",
+      "email": "appinsightssdk@microsoft.com"
+    }
+  ],
+  "main": "./out/main.js",
+  "scripts": {
+    "build:ts": "tsc --project ./tsconfig.json",
+    "build": "node-gyp configure && node-gyp rebuild",
+    "test": "mocha --recursive --expose-gc test/EndToEnd.js",
+    "test:native": "run-s test:renamebinding test:renametestbinding build test:runtests test:renameoriginalbinding",
+    "test:runtests": "node ./test_native/test.js",
+    "test:renamebinding": "rename-files ./ binding.gyp temp",
+    "test:renametestbinding": "cp test.gyp binding.gyp",
+    "test:renameoriginalbinding": "rename-files ./ temp binding.gyp",
+    "clean": "rimraf build/"
+  },
+  "gypfile": true,
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.13.2"
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.4",
+    "typescript": "^3.4.3",
+    "copyfiles": "^2.1.0",
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.1.5",
+    "rename-files": "0.0.2",
+    "rimraf": "^2.6.3",
+    "sinon": "^7.2.2"
+  }
+}
