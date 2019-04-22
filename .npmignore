@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# Except for deliverables
+
+# TS stuff
+!out/**
+!lib/**
+!package.json
+!tsconfig.json
+
+# C++ stuff
+!src/**
+!binding.gyp
+
+# Misc
+!README.md
+!LICENSE
+!.travis.yml
