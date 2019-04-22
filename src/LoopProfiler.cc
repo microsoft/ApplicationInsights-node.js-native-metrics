@@ -15,7 +15,7 @@ uint64_t _getUsage() {
   uv_getrusage(&usage);
 
   const uint64_t usageUs =
-      (usage.ru_utime.tv_sec + usage.ru_stime.tv_sec * SEC_TO_MICRO) +
+      ((usage.ru_utime.tv_sec + usage.ru_stime.tv_sec) * SEC_TO_MICRO) +
       (usage.ru_utime.tv_usec + usage.ru_stime.tv_usec);
 
   return usageUs;

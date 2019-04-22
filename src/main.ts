@@ -106,10 +106,7 @@ class NativeMetricEmitter extends events.EventEmitter {
     }
     if (this.enabled) {
       // Stop timer when disabled
-      this._handle = setTimeout(
-        this._emitUsage.bind(this, interval),
-        interval
-      );
+      this._handle = setTimeout(this._emitUsage.bind(this, interval), interval);
       this._handle.unref();
     }
   }

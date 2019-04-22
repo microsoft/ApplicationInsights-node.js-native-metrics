@@ -8,8 +8,8 @@ namespace ai {
 template <typename T>
 class Metric {
  public:
-  Metric() { _total = _min = _max = _count = (T)0; }
-  void reset() { _total = _min = _max = _count = (T)0; }
+  Metric() { _total = _min = _max = _count = _sumSquares = (T)0; }
+  void reset() { _total = _min = _max = _count = _sumSquares = (T)0; }
 
   Metric& operator+=(const T& val) {
     if (_count > 0) {
@@ -19,6 +19,7 @@ class Metric {
       _min = _max = val;
     }
 
+    _sumSquares += val * val;
     _total += val;
     _count++;
 
@@ -36,6 +37,8 @@ class Metric {
              Nan::New<v8::Number>(max()));
     Nan::Set(resJson, Nan::New("count").ToLocalChecked(),
              Nan::New<v8::Number>(count()));
+    Nan::Set(resJson, Nan::New("sumSquares").ToLocalChecked(),
+             Nan::New<v8::Number>(sumSquares()));
 
     return resJson;
   }
@@ -44,12 +47,14 @@ class Metric {
   const T& min() const { return _min; }
   const T& max() const { return _max; }
   const T& count() const { return _count; }
+  const T& sumSquares() const { return _sumSquares; }
 
  private:
   T _total;
   T _min;
   T _max;
   T _count;
+  T _sumSquares;
 };
 
 }  // namespace ai

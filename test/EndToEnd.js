@@ -29,7 +29,7 @@ describe("#EndToEnd", () => {
 
   it("should send resource usage information", done => {
     emitter.enable(false);
-    emitter.enable(true, 10);
+    emitter.enable(true, 100);
     if (emitter._resourceProfiler) {
       emitter.on("usage", usage => {
         assert.ok(usage);
