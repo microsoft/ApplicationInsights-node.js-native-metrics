@@ -27,6 +27,10 @@
   },
   "gypfile": true,
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/ApplicationInsights-node.js-native-metrics.git"
+  },
   "dependencies": {
     "nan": "^2.13.2",
     "node-pre-gyp": "^0.12.0"
@@ -43,9 +47,9 @@
   },
   "binary": {
     "module_name": "native_metrics",
-    "module_path": "./build/",
+    "module_path": "./build/Release",
     "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}-{libc}.tar.gz",
-    "host": "https://github.com/microsoft/applicationinsights-node.js-native-metrics/releases/download/",
-    "remote_path": "v{version}"
+    "host": "https://github.com/Microsoft/ApplicationInsights-node.js-native-metrics/releases/download/",
+    "remote_path": "{version}"
   }
 }
