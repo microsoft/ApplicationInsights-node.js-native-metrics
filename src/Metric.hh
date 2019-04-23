@@ -30,15 +30,15 @@ class Metric {
     auto resJson = Nan::New<v8::Object>();
 
     Nan::Set(resJson, Nan::New("total").ToLocalChecked(),
-             Nan::New<v8::Number>(total()));
+             Nan::New<v8::Number>((double)total()));
     Nan::Set(resJson, Nan::New("min").ToLocalChecked(),
-             Nan::New<v8::Number>(min()));
+             Nan::New<v8::Number>((double)min()));
     Nan::Set(resJson, Nan::New("max").ToLocalChecked(),
-             Nan::New<v8::Number>(max()));
+             Nan::New<v8::Number>((double)max()));
     Nan::Set(resJson, Nan::New("count").ToLocalChecked(),
-             Nan::New<v8::Number>(count()));
+             Nan::New<v8::Number>((double)count()));
     Nan::Set(resJson, Nan::New("sumSquares").ToLocalChecked(),
-             Nan::New<v8::Number>(sumSquares()));
+             Nan::New<v8::Number>((double)sumSquares()));
 
     return resJson;
   }

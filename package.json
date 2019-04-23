@@ -1,7 +1,7 @@
 {
   "name": "applicationinsights-native-metrics",
   "description": "Native APM agent for the Application Insights Node.js SDK",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "contributors": [
     {
       "name": "Application Insights Developer Support",

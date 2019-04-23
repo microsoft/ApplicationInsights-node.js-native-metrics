@@ -5,7 +5,7 @@
 
 namespace ai {
 
-const uint64_t SEC_TO_MICRO = 1e6;
+const uint64_t SEC_TO_MICRO = 1000000;
 
 /**
  * Get loop usage time in us
