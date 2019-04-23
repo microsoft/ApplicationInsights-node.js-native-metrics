@@ -1,7 +1,7 @@
 {
   "name": "applicationinsights-native-metrics",
   "description": "Native APM agent for the Application Insights Node.js SDK",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "contributors": [
     {
       "name": "Application Insights Developer Support",
@@ -50,6 +50,6 @@
     "module_path": "./build/Release",
     "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}-{libc}.tar.gz",
     "host": "https://github.com/Microsoft/ApplicationInsights-node.js-native-metrics/releases/download/",
-    "remote_path": "{version}"
+    "remote_path": "v{version}"
   }
 }
