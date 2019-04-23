@@ -1,6 +1,6 @@
 {
   "name": "applicationinsights-native-metrics",
-  "description": "Native APM agent for the Application Insights NodeJS SDK",
+  "description": "Native APM agent for the Application Insights Node.js SDK",
   "version": "0.0.1",
   "contributors": [
     {
@@ -14,6 +14,7 @@
   ],
   "main": "./out/main.js",
   "scripts": {
+    "install": "node-pre-gyp install --fallback-to-build",
     "build:ts": "tsc --project ./tsconfig.json",
     "build": "node-gyp configure && node-gyp rebuild",
     "test": "mocha --recursive --expose-gc test/EndToEnd.js",
@@ -27,7 +28,8 @@
   "gypfile": true,
   "license": "MIT",
   "dependencies": {
-    "nan": "^2.13.2"
+    "nan": "^2.13.2",
+    "node-pre-gyp": "^0.12.0"
   },
   "devDependencies": {
     "@types/node": "^11.13.4",
@@ -38,5 +40,12 @@
     "rename-files": "0.0.2",
     "rimraf": "^2.6.3",
     "sinon": "^7.2.2"
+  },
+  "binary": {
+    "module_name": "native_metrics",
+    "module_path": "./build/",
+    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}-{libc}.tar.gz",
+    "host": "https://github.com/microsoft/applicationinsights-node.js-native-metrics/releases/download/",
+    "remote_path": "v{version}"
   }
 }
