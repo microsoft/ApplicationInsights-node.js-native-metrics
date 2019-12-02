@@ -7,6 +7,8 @@ const emitter = new NativeMetricEmitter();
 describe("#EndToEnd", () => {
   it("should collect manual global.gc events", () => {
     if (emitter._gcProfiler) {
+      emitter.getGCData(); // clear any transient GCs
+
       // Verify precondition
       assert.deepEqual({}, emitter.getGCData());
 
