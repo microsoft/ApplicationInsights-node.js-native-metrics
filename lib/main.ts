@@ -1,5 +1,5 @@
 const events = require("events");
-const natives = require("../build/Release/native_metrics");
+const natives = require("../build/Release/native_metrics.node");
 
 type gcTypes =
   | "Scavenge"

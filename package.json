@@ -1,7 +1,7 @@
 {
   "name": "applicationinsights-native-metrics",
   "description": "Native APM agent for the Application Insights Node.js SDK",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "node": ">=6.0.0",
     "npm": ">=3.8.6"
@@ -27,8 +27,7 @@
     "test:renamebinding": "rename-files ./ binding.gyp temp",
     "test:renametestbinding": "cp test.gyp binding.gyp",
     "test:renameoriginalbinding": "rename-files ./ temp binding.gyp",
-    "clean": "rimraf build/",
-    "publish:github": "echo 'Publishing'; npm install node-pre-gyp-github@1.4.3; ./node_modules/.bin/node-pre-gyp configure; ./node_modules/.bin/node-pre-gyp build; ./node_modules/.bin/node-pre-gyp package; ./node_modules/.bin/node-pre-gyp-github publish;"
+    "clean": "rimraf build/"
   },
   "gypfile": true,
   "license": "MIT",
@@ -38,7 +37,7 @@
   },
   "dependencies": {
     "nan": "^2.14.0",
-    "node-pre-gyp": "^0.12.0"
+    "@mapbox/node-pre-gyp": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^11.15.2",
