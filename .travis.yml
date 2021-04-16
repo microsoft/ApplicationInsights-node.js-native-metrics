@@ -2,7 +2,7 @@ language: node_js
 services:
   - docker
 env:
-  - LINUX_CXX=g++-10.3
+  - LINUX_CXX=g++-4.9.4
 dist: trusty
 os:
   - linux
@@ -14,6 +14,10 @@ node_js:
   - "12"
   - "10"
   - "8"
+jobs:
+  exclude:
+   - os: linux
+    node_js: "15"
 before_install:
   - echo Building for Node $TRAVIS_NODE_VERSION
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX=$LINUX_CXX; $CXX --version; fi;
