@@ -2,7 +2,7 @@ language: node_js
 services:
   - docker
 env:
-  - LINUX_CXX=g++-4.9.4
+  - LINUX_CXX=g++-4.8
 dist: trusty
 os:
   - linux
