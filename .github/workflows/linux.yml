@@ -6,21 +6,27 @@ on:
       - 'v*'
   pull_request:
     branches: [ main ]
+env:
+  CXX: g++-4.8
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16.x]
         # node-version: [8.x,10.x, 12.x, 14.x, 15.x, 16.x, 17.x]
     steps:
       - uses: actions/checkout@v2
+      - name: Python Setup
+        uses: actions/setup-python@v2
+        run: |
+          python -m pip install --upgrade pip
+          pip install virtualenv
+          rm -rf /var/cache/apk/*; fi
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-        env:
-          LINUX_CXX: g++-4.8
       - run: npm ci
       - run: npm run build:ts
       - run: npm run build
@@ -30,4 +36,3 @@ jobs:
       - run: ./node_modules/.bin/node-pre-gyp build
       - run: ./node_modules/.bin/node-pre-gyp package
       - run: ./node_modules/.bin/node-pre-gyp-github publish
-
