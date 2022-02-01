@@ -1,4 +1,4 @@
-name: Application Insights Native Metrics Node.js CI
+name: Application Insights Native Metrics Windows CI
 
 on:
   push:
@@ -25,9 +25,5 @@ jobs:
       - run: npm run build:ts
       - run: npm run build
       - run: npm test
-      - run: npm install node-pre-gyp-github@1.4.3
-      - run: ./node_modules/.bin/node-pre-gyp configure
-      - run: ./node_modules/.bin/node-pre-gyp build
-      - run: ./node_modules/.bin/node-pre-gyp package
-      - run: ./node_modules/.bin/node-pre-gyp-github publish
+      - run: npm run publish:github
 
