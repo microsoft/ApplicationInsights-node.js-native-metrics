@@ -27,5 +27,4 @@ jobs:
       - run: npm run build:ts
       - run: npm run build
       - run: npm test
-      - run: npm install node-pre-gyp-github@1.4.3
       - run: npm run publish:github
