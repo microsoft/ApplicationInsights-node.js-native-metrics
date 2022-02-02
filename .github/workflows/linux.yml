@@ -22,11 +22,11 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - run: apk add --update \
-          python \
-          python-dev \
-          py-pip \
-          build-base \
+      - run: apt-get update \
+          && apt-get python \
+          && apt-get python-dev \
+          && apt-get py-pip \
+          && apt-get build-base \
           && pip install virtualenv \
           && rm -rf /var/cache/apk/*
 
