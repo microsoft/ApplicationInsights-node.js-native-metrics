@@ -1,15 +1,12 @@
 name: Application Insights Native Metrics Linux CI
-
 on:
   push:
     tags:
       - 'v*'
   pull_request:
     branches: [ master ]
-
 env:
   NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,11 +30,10 @@ jobs:
           path: build/stage/
           retention-days: 1
       - name: Publish
+      # Publish not compatible with node 8, need to manually upload the files
         if: ${{ matrix.node-version != '8' }}
         run: npm run publish:github
       # Generate musl binaries using Alpine Linux
-      - run: if [[ ${{ matrix.node-version }} != "8" ]]; then docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics .; fi;
-      - run: if [[ ${{ matrix.node-version }} != "8" ]]; then docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics; fi;
-
-      
-
+      # mhart/alpine-node:17 not currently available 
+      - run: if [ ${{ matrix.node-version }} != 8 &&  ${{ matrix.node-version }} != 17 ]; then docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics .; fi;
+      - run: if [ ${{ matrix.node-version }} != 8 &&  ${{ matrix.node-version }} != 17]; then docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics; fi;
