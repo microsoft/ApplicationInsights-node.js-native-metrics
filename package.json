@@ -58,6 +58,6 @@
     "module_path": "./build/Release",
     "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}-{libc}.tar.gz",
     "host": "https://github.com/Microsoft/ApplicationInsights-node.js-native-metrics/releases/download/",
-    "remote_path": "test"
+    "remote_path": "v{version}"
   }
 }

@@ -3,8 +3,6 @@ on:
   push:
     tags:
       - 'v*'
-  pull_request:
-    branches: [ master ]
 env:
   NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
@@ -12,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10, 12, 14, 16]
+        node-version: [8, 10, 12, 14, 15, 16, 17]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -29,11 +27,12 @@ jobs:
           name: linux_artifact_${{ matrix.node-version }}
           path: build/stage/
           retention-days: 1
-      # - name: Publish
-      # # Publish not compatible with node 8, need to manually upload the files
-      #   if: ${{ matrix.node-version != '8' }}
-      #   run: npm run publish:github
+      - name: Publish
+      # Publish not compatible with node 8, need to manually upload the files
+        if: ${{ matrix.node-version != '8' }}
+        run: npm run publish:github
       # Generate musl binaries using Alpine Linux
-      # mhart/alpine-node:17 not currently available 
-      - run: if [[ ${{ matrix.node-version }} != 8 &&  ${{ matrix.node-version }} != 17 ]]; then docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics .; fi;
-      - run: if [[ ${{ matrix.node-version }} != 8 &&  ${{ matrix.node-version }} != 17 ]]; then docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics; fi;
+      # TODO: mhart/alpine-node:17 not currently available 
+      # TODO: mhart/alpine-node:15 fails to install virtualenv 
+      - run: if [[ ${{ matrix.node-version }} != 8 &&  ${{ matrix.node-version }} != 15 &&  ${{ matrix.node-version }} != 17 ]]; then docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics .; fi;
+      - run: if [[ ${{ matrix.node-version }} != 8 &&  ${{ matrix.node-version }} != 15 &&  ${{ matrix.node-version }} != 17 ]]; then docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics; fi;
