@@ -29,13 +29,14 @@ jobs:
       - run: npm run package
       - uses: actions/upload-artifact@v2
         with:
-          name: linux_artifact
+          name: linux_artifact_${{ matrix.node-version }}
           path: build/stage/
+          retention-days: 1
       - name: Publish
         if: ${{ matrix.node-version != '8' }}
         run: npm run publish:github
       # Generate musl binaries using Alpine Linux
-      - run: if [[ ${{ matrix.node-version }} != "8" ]]; then docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics . fi;
+      - run: if [[ ${{ matrix.node-version }} != "8" ]]; then docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics .; fi;
       - run: if [[ ${{ matrix.node-version }} != "8" ]]; then docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics; fi;
 
       

@@ -30,8 +30,9 @@ jobs:
       - run: npm run package
       - uses: actions/upload-artifact@v2
         with:
-          name: macos_artifact
+          name: macos_artifact_${{ matrix.node-version }}
           path: build/stage/
+          retention-days: 1
       - name: Publish
         if: ${{ matrix.node-version != '8' }}
         run: npm run publish:github

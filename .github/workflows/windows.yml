@@ -30,9 +30,14 @@ jobs:
       - run: npm run package
       - uses: actions/upload-artifact@v2
         with:
-          name: windows_artifact
+          name: windows_artifact_${{ matrix.node-version }}
           path: build/stage/
+          retention-days: 1
       
+      - name: Install publish package
+        if: ${{ matrix.node-version != '8' }}
+        run: npm i @mmomtchev/node-pre-gyp-github
+
       - name: Publish
         if: ${{ matrix.node-version != '8' }}
-        run: npm i @mmomtchev/node-pre-gyp-github && npm run publish:github:windows
+        run: npm run publish:github:windows
