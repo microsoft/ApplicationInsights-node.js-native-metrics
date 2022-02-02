@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [8.x,10.x, 12.x, 14.x, 15.x, 16.x, 17.x]
+        node-version: [16.x]
     env:
       CXX: g++-4.8
       NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
