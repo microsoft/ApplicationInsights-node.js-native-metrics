@@ -12,7 +12,7 @@ RUN apk add --update \
     python3  \
     py3-pip \
     build-base \
-  && pip install virtualenv \
+  && pip3 install virtualenv \
   && rm -rf /var/cache/apk/*
 
 # Build & Test

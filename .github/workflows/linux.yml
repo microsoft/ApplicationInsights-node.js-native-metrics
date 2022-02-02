@@ -26,7 +26,7 @@ jobs:
       - run: npm run build:ts
       - run: npm run build
       - run: npm test
-      # - run: npm run publish:github
+      - run: npm run publish:github
       # Generate musl binaries using Alpine Linux
       - run: docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics .
       - run: docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics
