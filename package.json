@@ -28,7 +28,10 @@
     "test:renametestbinding": "cp test.gyp binding.gyp",
     "test:renameoriginalbinding": "rename-files ./ temp binding.gyp",
     "clean": "rimraf build/",
-    "publish:github": "echo 'Publishing'; npm install node-pre-gyp-github@1.4.3; ./node_modules/.bin/node-pre-gyp configure; ./node_modules/.bin/node-pre-gyp build; ./node_modules/.bin/node-pre-gyp package; ./node_modules/.bin/node-pre-gyp-github publish;"
+    "package": "./node_modules/.bin/node-pre-gyp configure; ./node_modules/.bin/node-pre-gyp build; ./node_modules/.bin/node-pre-gyp package",
+    "package:windows": ".\\node_modules\\.bin\\node-pre-gyp configure build package",
+    "publish:github": "npm i @mmomtchev/node-pre-gyp-github; ./node_modules/.bin/node-pre-gyp-github publish;",
+    "publish:github:windows": ".\\node_modules\\.bin\\node-pre-gyp-github publish"
   },
   "gypfile": true,
   "license": "MIT",
@@ -37,8 +40,8 @@
     "url": "https://github.com/Microsoft/ApplicationInsights-node.js-native-metrics.git"
   },
   "dependencies": {
-    "nan": "^2.14.0",
-    "@mapbox/node-pre-gyp": "^1.0.0"
+    "@mapbox/node-pre-gyp": "^1.0.8",
+    "nan": "^2.14.0"
   },
   "devDependencies": {
     "@types/node": "^11.15.2",
