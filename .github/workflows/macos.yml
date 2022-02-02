@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-  pull_request:
-    branches: [ master ]
 
 env:
   LINUX_CXX: g++-4.8
