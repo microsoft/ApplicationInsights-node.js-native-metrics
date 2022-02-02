@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-  pull_request:
-    branches: [ master ]
 
 env:
   LINUX_CXX: g++-4.8
@@ -16,7 +14,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [8.x,10.x, 12.x, 14.x, 15.x, 16.x, 17.x]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
