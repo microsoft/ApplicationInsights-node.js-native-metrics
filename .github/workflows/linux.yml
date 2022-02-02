@@ -6,17 +6,24 @@ on:
       - 'v*'
   pull_request:
     branches: [ master ]
+
+env:
+  CXX: g++-4.8
+  NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16.x]
-    env:
-      CXX: g++-4.8
-      NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - run: pip install virtualenv && rm -rf /var/cache/apk/*
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
