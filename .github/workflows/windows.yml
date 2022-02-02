@@ -27,6 +27,12 @@ jobs:
       - run: npm run build:ts
       - run: npm run build
       - run: npm test
-      - run: npm i @mmomtchev/node-pre-gyp-github
-      - run: npm run publish:github:windows
-
+      - run: npm run package
+      - uses: actions/upload-artifact@v2
+        with:
+          name: windows_artifact
+          path: build/stage/
+      
+      - name: Publish
+        if: ${{ matrix.node-version != '8' }}
+        run: npm i @mmomtchev/node-pre-gyp-github && npm run publish:github:windows

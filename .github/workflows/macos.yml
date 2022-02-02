@@ -27,4 +27,11 @@ jobs:
       - run: npm run build:ts
       - run: npm run build
       - run: npm test
-      - run: npm run publish:github
+      - run: npm run package
+      - uses: actions/upload-artifact@v2
+        with:
+          name: macos_artifact
+          path: build/stage/
+      - name: Publish
+        if: ${{ matrix.node-version != '8' }}
+        run: npm run publish:github

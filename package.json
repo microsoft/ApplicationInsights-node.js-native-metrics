@@ -28,8 +28,10 @@
     "test:renametestbinding": "cp test.gyp binding.gyp",
     "test:renameoriginalbinding": "rename-files ./ temp binding.gyp",
     "clean": "rimraf build/",
-    "publish:github": "echo 'Publishing'; npm i @mmomtchev/node-pre-gyp-github; ./node_modules/.bin/node-pre-gyp configure; ./node_modules/.bin/node-pre-gyp build; ./node_modules/.bin/node-pre-gyp package; ./node_modules/.bin/node-pre-gyp-github publish;",
-    "publish:github:windows": ".\\node_modules\\.bin\\node-pre-gyp configure build package && .\\node_modules\\.bin\\node-pre-gyp-github publish"
+    "package": "./node_modules/.bin/node-pre-gyp configure; ./node_modules/.bin/node-pre-gyp build; ./node_modules/.bin/node-pre-gyp package",
+    "package:windows": ".\\node_modules\\.bin\\node-pre-gyp configure build package",
+    "publish:github": "npm i @mmomtchev/node-pre-gyp-github; ./node_modules/.bin/node-pre-gyp-github publish;",
+    "publish:github:windows": ".\\node_modules\\.bin\\node-pre-gyp-github publish"
   },
   "gypfile": true,
   "license": "MIT",
