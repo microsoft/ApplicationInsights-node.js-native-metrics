@@ -20,6 +20,7 @@ jobs:
       - run: npm ci
       - run: npm run build:ts
       - run: npm run build
+      - run: if [[ ${{ matrix.node-version }} == 14 ]]; then npm run lint; fi;
       - run: npm test
       - run: npm run package
       - uses: actions/upload-artifact@v2
