@@ -12,15 +12,18 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-# How to contribute to the Application Insights Node.js Native Metrics
+# How to contribute to the Native APM agent for the Application Insights Node.js SDK
 
-1. Install all dependencies with `npm install`.
-2. Build the code
+
+1. Fork this repo
+2. Clone your fork locally (`git clone https://github.com/<youruser>/ApplicationInsights-node.js-native-metrics
+3. Open a terminal and move into your local copy (`cd ApplicationInsights-node.js-native-metrics`)
+4. Install all dependencies with `npm install`.
+5. Build the code
     ```bash
     npm run build
-3. Run tests
+6. Run tests
     ```bash
     npm run test
     ```
-
 ---
