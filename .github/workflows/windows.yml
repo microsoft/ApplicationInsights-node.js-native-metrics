@@ -11,8 +11,9 @@ env:
   NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2019
     strategy:
+      fail-fast: true
       matrix:
         node-version: [8, 10, 12, 14, 15, 16, 17]
     steps:

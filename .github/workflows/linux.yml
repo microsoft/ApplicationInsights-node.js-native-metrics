@@ -3,12 +3,16 @@ on:
   push:
     tags:
       - 'v*'
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ master ]
 env:
   NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: true
       matrix:
         node-version: [8, 10, 12, 14, 15, 16, 17]
     steps:
