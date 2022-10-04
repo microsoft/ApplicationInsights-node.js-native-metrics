@@ -6,16 +6,6 @@
     "node": ">=6.0.0",
     "npm": ">=3.8.6"
   },
-  "contributors": [
-    {
-      "name": "Application Insights Developer Support",
-      "email": "aidevsupport@microsoft.com"
-    },
-    {
-      "name": "Application Insights SDK Maintainers",
-      "email": "appinsightssdk@microsoft.com"
-    }
-  ],
   "main": "./out/main.js",
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
