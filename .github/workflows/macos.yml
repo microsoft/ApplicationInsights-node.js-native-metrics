@@ -24,7 +24,6 @@ jobs:
       - run: npm i
       - run: npm run build:ts
       - run: npm run build
-      - run: npm test
       - run: npm run package
       - uses: actions/upload-artifact@v2
         with:
