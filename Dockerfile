@@ -19,7 +19,6 @@ RUN apk add --update \
 RUN npm install
 RUN npm run build:ts
 RUN npm run build
-RUN npm test
 RUN npm run package
 
 # # Publish binary to github
