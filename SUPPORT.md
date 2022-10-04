@@ -7,7 +7,7 @@ issues before filing new issues to avoid duplicates.  For new issues, file your 
 feature request as a new Issue.
 
 For help and questions about using this project, please create a Support request issue on
-https://github.com/microsoft/ApplicationInsights-node.js/issues.
+https://github.com/microsoft/ApplicationInsights-node.js-native-metrics/issues.
 
 ## Microsoft Support Policy  
 
