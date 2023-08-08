@@ -1,7 +1,7 @@
 {
   "name": "applicationinsights-native-metrics",
   "description": "Native APM agent for the Application Insights Node.js SDK",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "engines": {
     "node": ">=6.0.0",
     "npm": ">=3.8.6"
@@ -40,9 +40,7 @@
     "@typescript-eslint/parser": "^5.51.0",
     "copyfiles": "^2.1.1",
     "eslint": "^8.46.0",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-node": "^11.1.0",
     "mocha": "^10.2.0",
     "rename-files": "0.0.2",
     "rimraf": "^2.7.1",
