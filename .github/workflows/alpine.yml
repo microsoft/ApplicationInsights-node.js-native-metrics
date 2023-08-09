@@ -1,0 +1,24 @@
+name: Application Insights Native Metrics Linux Alpine CI
+on:
+  push:
+    tags:
+      - 'v*'
+env:
+  NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [8, 10, 12, 14, 16, 18, 20]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+       # Generate musl binaries using Alpine Linux
+      - run: docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics .;
+      - run: docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics;
