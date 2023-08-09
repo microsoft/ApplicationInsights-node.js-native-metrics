@@ -1,8 +1,8 @@
 name: Application Insights Native Metrics Linux CI
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - hectorhdzg/alpine
 env:
   NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
@@ -33,3 +33,8 @@ jobs:
       # Publish not compatible with node 8, need to manually upload the files
         if: ${{ matrix.node-version != '8' }}
         run: npm run publish:github
+      # Generate musl binaries using Alpine Linux
+      # TODO: mhart/alpine-node:17 not currently available 
+      # TODO: mhart/alpine-node:15 fails to install virtualenv 
+      - run: if [[ ${{ matrix.node-version }} != 8 &&  ${{ matrix.node-version }} != 15 &&  ${{ matrix.node-version }} != 17 ]]; then docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics .; fi;
+      - run: if [[ ${{ matrix.node-version }} != 8 &&  ${{ matrix.node-version }} != 15 &&  ${{ matrix.node-version }} != 17 ]]; then docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics; fi;
