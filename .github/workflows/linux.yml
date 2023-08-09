@@ -29,7 +29,6 @@ jobs:
           name: linux_artifact_${{ matrix.node-version }}
           path: build/stage/
           retention-days: 1
-      - name: Alpine
       # Generate musl binaries using Alpine Linux
       # TODO: mhart/alpine-node:17 not currently available 
       # TODO: mhart/alpine-node:15 fails to install virtualenv 
