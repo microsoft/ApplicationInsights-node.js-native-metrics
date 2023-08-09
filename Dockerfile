@@ -1,5 +1,5 @@
 ARG VERSION=latest
-FROM node::${VERSION}-alpine
+FROM node:${VERSION}-alpine
 
 WORKDIR .
 
