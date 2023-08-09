@@ -1,8 +1,8 @@
-name: Application Insights Native Metrics Linux CI
+name: Application Insights Native Metrics Alpine Linux CI
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - hectorhdzg/alpine
 env:
   NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
@@ -12,24 +12,22 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        node-version: [8, 10, 12, 14, 15, 16, 17, 18, 19]
+        node-version: [12, 14, 16, 18, 20]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: npm install
       - run: npm run build:ts
       - run: npm run build
-      - run: if [[ ${{ matrix.node-version }} == 14 ]]; then npm run lint; fi;
       - run: npm run package
+       # Generate musl binaries using Alpine Linux
+      - run: docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics
+      - run: docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics
       - uses: actions/upload-artifact@v2
         with:
-          name: linux_artifact_${{ matrix.node-version }}
+          name: alpine_artifact_${{ matrix.node-version }}
           path: build/stage/
           retention-days: 1
-      - name: Publish
-      # Publish not compatible with node 8, need to manually upload the files
-        if: ${{ matrix.node-version != '8' }}
-        run: npm run publish:github
