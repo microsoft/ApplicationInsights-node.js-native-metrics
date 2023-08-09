@@ -1,4 +1,4 @@
-name: Application Insights Native Metrics Alpine Linux CI
+name: Application Insights Native Metrics Linux Alpine CI
 on:
   push:
     branches:
@@ -24,10 +24,10 @@ jobs:
       - run: npm run build
       - run: npm run package
        # Generate musl binaries using Alpine Linux
-      - run: docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics
-      - run: docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics
+      - run: docker build --build-arg VERSION=${{ matrix.node-version }} -t tmp/alpine-native-metrics .; fi;
+      - run: docker run -e NODE_PRE_GYP_GITHUB_TOKEN tmp/alpine-native-metrics; fi;
       - uses: actions/upload-artifact@v2
         with:
-          name: alpine_artifact_${{ matrix.node-version }}
+          name: linux_alpine_artifact_${{ matrix.node-version }}
           path: build/stage/
           retention-days: 1
