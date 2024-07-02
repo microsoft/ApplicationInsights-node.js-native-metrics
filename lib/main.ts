@@ -1,8 +1,10 @@
 const events = require("events");
+const os = require("os");
 const natives = require("../build/Release/native_metrics.node");
 
 type gcTypes =
   | "Scavenge"
+  | "MinorMarkCompact"
   | "MarkSweepCompact"
   | "IncrementalMarking"
   | "ProcessWeakCallbacks"
@@ -19,6 +21,17 @@ class NativeMetricEmitter extends events.EventEmitter {
     15: "All" // For > node4
   };
 
+  // Node 18 and newer
+  // https://v8docs.nodesource.com/node-18.2/db/d88/v8-callbacks_8h_source.html
+  private static GC_TYPES_NEW: { [key: number]: gcTypes } = {
+    1: "Scavenge",
+    2: "MinorMarkCompact",
+    4: "MarkSweepCompact",
+    8: "IncrementalMarking",
+    16: "ProcessWeakCallbacks",
+    31: "All"
+  };
+
   private static DEFAULT_INTERVAL = 15000;
 
   private enabled: boolean;
@@ -26,9 +39,12 @@ class NativeMetricEmitter extends events.EventEmitter {
   private _loopProfiler: any;
   private _gcProfiler: any;
   private _resourceProfiler: any;
+  private _nodeMajVer: number;
 
   constructor(options: any) {
     super(options);
+
+    this._nodeMajVer = parseInt(process.versions.node.split('.')[0], 10);
 
     options = options || { timeout: NativeMetricEmitter.DEFAULT_INTERVAL };
     this.enabled = false;
@@ -58,7 +74,13 @@ class NativeMetricEmitter extends events.EventEmitter {
     const results = Object.create(null);
     for (let typeId in gcMetrics) {
       if (gcMetrics.hasOwnProperty(typeId) && gcMetrics[typeId].count > 0) {
-        const typeName = NativeMetricEmitter.GC_TYPES[typeId];
+        let typeName = "";
+        if (this._nodeMajVer >= 18) {
+          typeName = NativeMetricEmitter.GC_TYPES_NEW[typeId];
+        }
+        else {
+          typeName = NativeMetricEmitter.GC_TYPES[typeId];
+        }
         results[typeName] = {
           typeId: parseInt(typeId, 10),
           type: typeName,
