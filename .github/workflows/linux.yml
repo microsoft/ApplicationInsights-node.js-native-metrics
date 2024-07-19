@@ -32,3 +32,4 @@ jobs:
       # Publish not compatible with node 8, need to manually upload the files
         if: ${{ matrix.node-version != '8' }}
         run: npm run publish:github
+        
