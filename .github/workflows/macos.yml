@@ -16,6 +16,13 @@ jobs:
         node-version: [8, 10, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22]
     steps:
       - uses: actions/checkout@v2
+      - name: Install setuptools
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+      - run: python3 -m pip install setuptools
+      
+      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
