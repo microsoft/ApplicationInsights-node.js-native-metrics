@@ -19,8 +19,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      #- run: npm install
-      - run: npm ci
+      - run: node-pre-gyp install -g --fallback-to-build
+      - run: npm install
       - run: npm run build:ts
       - run: npm run build
       - run: npm run package
