@@ -19,9 +19,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+      - run: apk add --no-cache build-base g++ cairo-dev jpeg-dev pango-dev giflib-dev
+      - run: apk add --update --repository http://dl-3.alpinelinux.org/alpine/edge/testing libmount ttf-dejavu ttf-droid ttf-freefont ttf-liberation fontconfig
       - run: npm install
-      - run: npm -g install node-pre-gyp
-      - run: npm -g install node-gyp
       - run: npm run build:ts
       - run: npm run build
       - run: npm run package
