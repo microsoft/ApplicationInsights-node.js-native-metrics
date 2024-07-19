@@ -19,7 +19,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: rm -r node_modules
       - run: npm ci
       - run: npm run build:ts
       - run: npm run build
