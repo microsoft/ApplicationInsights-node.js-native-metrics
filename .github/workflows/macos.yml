@@ -36,7 +36,7 @@ jobs:
           name: macos_artifact_${{ matrix.node-version }}
           path: build/stage/
           retention-days: 1
-      - name: Publish
-      # Publish not compatible with node 8, need to manually upload the files
-        if: ${{ matrix.node-version != '8' }}
-        run: npm run publish:github
+      # - name: Publish
+      # # Publish not compatible with node 8, need to manually upload the files
+      #   if: ${{ matrix.node-version != '8' }}
+      #   run: npm run publish:github
