@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+      - run: rm -r node_modules
       - run: npm ci
       - run: npm run build:ts
       - run: npm run build
@@ -34,4 +35,3 @@ jobs:
       # Publish not compatible with node 8, need to manually upload the files
         if: ${{ matrix.node-version != '8' }}
         run: npm run publish:github
-        
