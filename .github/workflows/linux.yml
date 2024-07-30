@@ -1,8 +1,8 @@
 name: Application Insights Native Metrics Linux CI
 on:
   push:
-    branches:
-      - jacksonweber/fix-linux-binaries
+    tags:
+      - 'v*'
 env:
   NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
