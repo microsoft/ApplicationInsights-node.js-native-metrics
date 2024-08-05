@@ -8,7 +8,7 @@ env:
   NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-12
     continue-on-error: true
     strategy:
       fail-fast: true
@@ -16,11 +16,18 @@ jobs:
         node-version: [8, 10, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22]
     steps:
       - uses: actions/checkout@v2
+      - name: Install setuptools
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+      - run: python3 -m pip install setuptools
+
+      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: npm install
       - run: npm run build:ts
       - run: npm run build
       - run: npm run package
@@ -29,7 +36,9 @@ jobs:
           name: macos_artifact_${{ matrix.node-version }}
           path: build/stage/
           retention-days: 1
-      - name: Publish
-      # Publish not compatible with node 8, need to manually upload the files
-        if: ${{ matrix.node-version != '8' }}
-        run: npm run publish:github
+      # - name: Publish
+      # # Publish not compatible with node 8, need to manually upload the files
+      #   if: ${{ matrix.node-version != '8' }}
+      #   run: npm run publish:github
+
+      

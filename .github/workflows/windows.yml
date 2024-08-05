@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: npm install
       - run: npm run build:ts
       - run: npm run build
       - run: npm run package:windows
@@ -33,6 +33,8 @@ jobs:
       # Publish not compatible with node 8, need to manually upload the files
         if: ${{ matrix.node-version != 8 }}
         run: npm i @mmomtchev/node-pre-gyp-github
-      - name: Publish
-        if: ${{ matrix.node-version != 8 }}
-        run: npm run publish:github:windows
+      # - name: Publish
+      #   if: ${{ matrix.node-version != 8 }}
+      #   run: npm run publish:github:windows
+
+      

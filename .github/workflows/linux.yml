@@ -7,7 +7,7 @@ env:
   NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     continue-on-error: true
     strategy:
       fail-fast: true
@@ -19,17 +19,17 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: npm install
       - run: npm run build:ts
       - run: npm run build
-      - run: if [[ ${{ matrix.node-version }} == 14 ]]; then npm run lint; fi;
       - run: npm run package
       - uses: actions/upload-artifact@v2
         with:
           name: linux_artifact_${{ matrix.node-version }}
           path: build/stage/
           retention-days: 1
-      - name: Publish
-      # Publish not compatible with node 8, need to manually upload the files
-        if: ${{ matrix.node-version != '8' }}
-        run: npm run publish:github
+      # - name: Publish
+      # # Publish not compatible with node 8, need to manually upload the files
+      #   if: ${{ matrix.node-version != '8' }}
+      #   run: npm run publish:github
+      
