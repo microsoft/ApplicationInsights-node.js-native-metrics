@@ -6,3 +6,4 @@ queries:
 paths-ignore:
   - '**/tests/'
   - '**/out/'
+  - '**/*.gyp'
