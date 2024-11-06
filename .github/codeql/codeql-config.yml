@@ -4,6 +4,6 @@ queries:
   - uses: security-and-quality
 
 paths-ignore:
-  - '**/tests/'
+  - '**/test/'
   - '**/out/'
   - '**/*.gyp'
