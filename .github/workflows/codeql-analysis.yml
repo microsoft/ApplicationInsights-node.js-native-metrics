@@ -94,7 +94,7 @@ jobs:
 
     - name: Build
       run: |
-        npm install -g nan
+        npm install --save nan
         node-gyp configure
         node-gyp rebuild
 
