@@ -68,16 +68,16 @@ jobs:
       run: sudo apt-get install -y g++
 
     - name: Compile GCProfiler
-      run: g++ -c GcProfiler.cc -o GcProfiler.o
+      run: g++ -c src/GcProfiler.cc -o GcProfiler.o
 
     - name: Compile LoopProfiler
-      run: g++ -c LoopProfiler.cc -o LoopProfiler.o
+      run: g++ -c src/LoopProfiler.cc -o LoopProfiler.o
 
     - name: Compile ResourceProfiler
-      run: g++ -c ResourceProfiler.cc -o ResourceProfiler.o
+      run: g++ -c src/ResourceProfiler.cc -o ResourceProfiler.o
 
     - name: Compile native_metric
-      run: g++ -c native_metrics.cc -o native_metrics.o
+      run: g++ -c src/native_metrics.cc -o native_metrics.o
 
     - name: Link objects
       run: g++ GcProfiler.o LoopProfiler.o ResourceProfiler.o native_metrics.o -o profiler_executable
