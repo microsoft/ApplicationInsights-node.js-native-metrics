@@ -72,9 +72,6 @@ jobs:
     - name: Install node-pre-gyp globally
       run: npm install -g @mapbox/node-pre-gyp
 
-    - name: Install node-pre-gyp globally
-      run: npm install -g node-gyp
-
     - name: Install nan globally
       run: npm install -g nan
 
@@ -91,7 +88,8 @@ jobs:
 
     - name: Build
       run: |
-        node-pre-gyp rebuild
+        node-gyp configure
+        node-gyp rebuild
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
