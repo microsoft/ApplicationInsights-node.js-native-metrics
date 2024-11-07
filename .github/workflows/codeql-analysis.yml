@@ -69,32 +69,25 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Install node-gyp
+    - name: Install node-gyp globally
       run: npm install -g node-gyp
-        
-    - name: Install NAN
-      run: npm install nan
 
-    - name: Install dependencies
-      run: sudo apt-get install -y g++
+    - name: Install Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    
+    - name: Install Make
+      run: sudo apt-get update && sudo apt-get install -y make
 
-    - name: Configure node-gyp
-      run: node-gyp configure
+    - name: Install GCC
+      run: sudo apt-get update && sudo apt-get install -y gcc
 
-    - name: Compile GcProfiler
-      run: g++ -c src/GcProfiler.cc -o src/GcProfiler.o -I./node_modules/nan -I$(node -p "require('node-gyp').findNodeDirectory()")/include/node
-
-    - name: Compile LoopProfiler
-      run: g++ -c src/LoopProfiler.cc -o LoopProfiler.o
-
-    - name: Compile ResourceProfiler
-      run: g++ -c src/ResourceProfiler.cc -o ResourceProfiler.o
-
-    - name: Compile native_metric
-      run: g++ -c src/native_metrics.cc -o native_metrics.o
-
-    - name: Link objects
-      run: g++ GcProfiler.o LoopProfiler.o ResourceProfiler.o native_metrics.o -o profiler_executable
+    - name: Build
+      run: |
+        cd src
+        node-gyp configure
+        node-gyp build
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
