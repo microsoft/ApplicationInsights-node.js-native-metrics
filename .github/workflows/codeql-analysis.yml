@@ -76,7 +76,7 @@ jobs:
       run: sudo apt-get install -y g++
 
     - name: Compile GCProfiler
-      run: g++ -c src/GcProfiler.cc -o GcProfiler.o
+      run: g++ -c src/GcProfiler.cc -o GcProfiler.o -I./node_modules/nan
 
     - name: Compile LoopProfiler
       run: g++ -c src/LoopProfiler.cc -o LoopProfiler.o
