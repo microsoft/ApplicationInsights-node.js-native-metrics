@@ -72,6 +72,12 @@ jobs:
     - name: Install node-pre-gyp globally
       run: npm install -g @mapbox/node-pre-gyp
 
+    - name: Install Node gyp
+      run: npm install -g node-gyp
+
+    - name: Install node-pre-gyp globally
+      run: npm install -g node-pre-gyp install --fallback-to-build
+
     - name: Install nan globally
       run: npm install -g nan
 
