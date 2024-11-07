@@ -76,7 +76,7 @@ jobs:
       run: npm install -g node-gyp
 
     - name: Install node-pre-gyp globally
-      run: npm install -g node-pre-gyp install --fallback-to-build
+      run: node-pre-gyp install --fallback-to-build
 
     - name: Install nan globally
       run: npm install -g nan
