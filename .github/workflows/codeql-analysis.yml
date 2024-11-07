@@ -68,6 +68,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '20'
+
+    - name: Install node-gyp
+      run: npm install -g node-gyp
         
     - name: Install NAN
       run: npm install nan
@@ -75,8 +78,11 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install -y g++
 
-    - name: Compile GCProfiler
-      run: g++ -c src/GcProfiler.cc -o GcProfiler.o -I./node_modules/nan
+    - name: Configure node-gyp
+      run: node-gyp configure
+
+    - name: Compile GcProfiler
+      run: g++ -c GcProfiler.cc -o GcProfiler.o -I./node_modules/nan -I$(node -p "require('node-gyp').findNodeDirectory()")/include/node
 
     - name: Compile LoopProfiler
       run: g++ -c src/LoopProfiler.cc -o LoopProfiler.o
