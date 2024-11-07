@@ -67,10 +67,10 @@ jobs:
     - name: Install Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '20'
+        node-version: '16'
 
     - name: Install node-gyp
-      run: npm install node-gyp
+      run: npm install -g node-gyp
         
     - name: Install NAN
       run: npm install nan
