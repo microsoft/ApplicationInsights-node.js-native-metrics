@@ -64,6 +64,14 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
 
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+        
+    - name: Install NAN
+      run: npm install nan
+
     - name: Install dependencies
       run: sudo apt-get install -y g++
 
