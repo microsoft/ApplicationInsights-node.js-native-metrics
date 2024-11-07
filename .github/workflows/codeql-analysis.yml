@@ -70,7 +70,7 @@ jobs:
         node-version: '20'
 
     - name: Install node-gyp
-      run: npm install -g node-gyp
+      run: npm install node-gyp
         
     - name: Install NAN
       run: npm install nan
@@ -82,7 +82,7 @@ jobs:
       run: node-gyp configure
 
     - name: Compile GcProfiler
-      run: g++ -c GcProfiler.cc -o GcProfiler.o -I./node_modules/nan -I$(node -p "require('node-gyp').findNodeDirectory()")/include/node
+      run: g++ -c src/GcProfiler.cc -o src/GcProfiler.o -I./node_modules/nan -I$(node -p "require('node-gyp').findNodeDirectory()")/include/node
 
     - name: Compile LoopProfiler
       run: g++ -c src/LoopProfiler.cc -o LoopProfiler.o
