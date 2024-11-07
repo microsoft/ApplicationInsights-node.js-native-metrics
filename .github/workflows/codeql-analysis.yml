@@ -69,8 +69,11 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Install NPM Dependencies
-      run: npm install
+    - name: Install node-pre-gyp globally
+      run: npm install -g @mapbox/node-pre-gyp
+
+    - name: Install nan globally
+      run: npm install -g nan
 
     - name: Install Python
       uses: actions/setup-python@v2
