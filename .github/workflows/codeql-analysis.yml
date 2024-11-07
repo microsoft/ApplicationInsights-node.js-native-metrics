@@ -68,7 +68,7 @@ jobs:
       run: sudo apt-get install -y g++
 
     - name: Compile GCProfiler
-      run: g++ -c GCProfiler.cc -o GCProfiler.o
+      run: g++ -c GcProfiler.cc -o GcProfiler.o
 
     - name: Compile LoopProfiler
       run: g++ -c LoopProfiler.cc -o LoopProfiler.o
@@ -77,10 +77,10 @@ jobs:
       run: g++ -c ResourceProfiler.cc -o ResourceProfiler.o
 
     - name: Compile native_metric
-      run: g++ -c native_metric.cc -o native_metric.o
+      run: g++ -c native_metrics.cc -o native_metrics.o
 
     - name: Link objects
-      run: g++ GCProfiler.o LoopProfiler.o ResourceProfiler.o native_metric.o -o profiler_executable
+      run: g++ GcProfiler.o LoopProfiler.o ResourceProfiler.o native_metrics.o -o profiler_executable
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
