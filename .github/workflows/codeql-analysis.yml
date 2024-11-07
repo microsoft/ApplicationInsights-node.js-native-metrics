@@ -95,6 +95,7 @@ jobs:
     - name: Build
       run: |
         node-gyp configure
+        npm install -g nan
         node-gyp rebuild
 
     - name: Perform CodeQL Analysis
