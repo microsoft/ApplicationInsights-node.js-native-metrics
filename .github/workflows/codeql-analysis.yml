@@ -69,13 +69,8 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Install node-gyp globally
-      run: npm install -g node-gyp
-
-    - name: Install nan globally
-      run: |
-        npm install -g nan
-        export NODE_PATH=$(npm root -g)
+    - name: Install NPM Dependencies
+      run: npm install
 
     - name: Install Python
       uses: actions/setup-python@v2
@@ -90,8 +85,7 @@ jobs:
 
     - name: Build
       run: |
-        node-gyp configure
-        node-gyp build
+        node-pre-gyp rebuild
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
