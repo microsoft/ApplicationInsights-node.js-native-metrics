@@ -65,8 +65,10 @@ jobs:
     #    uses a compiled language
 
     - run: |
-        make bootstrap
-        make release
+        mkdir -p build
+        for file in src/*.cpp; do
+          g++ -o build/${file%.cpp} $file
+        done
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
