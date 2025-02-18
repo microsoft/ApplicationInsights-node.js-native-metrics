@@ -7,3 +7,4 @@ paths-ignore:
   - '**/test/'
   - '**/out/'
   - '**/*.gyp'
+  - '*.gyp'
