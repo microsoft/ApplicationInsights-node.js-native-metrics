@@ -2,6 +2,8 @@ name: "CodeQL config"
 
 queries:
   - uses: security-and-quality
+    with:
+      languages: ['cpp', 'python', 'javascript']
 
 paths-ignore:
   - '**/test/'
