@@ -31,7 +31,7 @@
     "url": "https://github.com/Microsoft/ApplicationInsights-node.js-native-metrics.git"
   },
   "dependencies": {
-    "@mapbox/node-pre-gyp": "^1.0.11",
+    "@mapbox/node-pre-gyp": "^2.0.3",
     "nan": "^2.20.0"
   },
   "devDependencies": {
