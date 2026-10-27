@@ -1,6 +1,10 @@
 # Contributing
 
-This project welcomes contributions and suggestions. Most contributions require you to agree to a
+> **Retirement notice:** This repository is being prepared for archival and is no longer accepting new contributions. For Node.js runtime metrics, use upstream OpenTelemetry's [`@opentelemetry/instrumentation-runtime-node`](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-runtime-node). For Azure Monitor Application Insights integration, use the [Microsoft OpenTelemetry Distro for Node.js](https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable?tabs=nodejs). See [README.md](README.md) for migration guidance and [SUPPORT.md](SUPPORT.md) for support resources.
+
+The following contribution requirements and development instructions are retained for reference.
+
+Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
 the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
