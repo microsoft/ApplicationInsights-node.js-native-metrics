@@ -1,18 +1,43 @@
 # ApplicationInsights Node.js Native Metrics
+
+> **Retirement notice:** This repository is being prepared for archival and is no longer accepting new contributions or feature requests. For Node.js runtime metrics, use upstream OpenTelemetry's [`@opentelemetry/instrumentation-runtime-node`](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-runtime-node). For Azure Monitor Application Insights integration, use the [Microsoft OpenTelemetry Distro for Node.js](https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable?tabs=nodejs) (`@microsoft/opentelemetry`).
+
 Native Metrics Agent for the Application Insights Node.js SDK
 
-## Getting Started
-Your app must be using the [Application Insights Node.js SDK](https://github.com/microsoft/applicationinsights-node.js).
+## Upstream OpenTelemetry runtime metrics
 
-Once your app is using the Application Insights SDK, you can add native metrics capabilities by simply adding the native-metrics package to your app.
-No further configuration is required!
-```zsh
-npm i --save applicationinsights-native-metrics
+We recommend [`@opentelemetry/instrumentation-runtime-node`](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-runtime-node) as the upstream OpenTelemetry alternative for collecting Node.js runtime metrics, including event-loop utilization and delay, garbage-collection duration, and V8 heap memory.
+
+```sh
+npm install @opentelemetry/instrumentation-runtime-node
 ```
+
+Follow the [upstream setup and compatibility documentation](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-runtime-node#readme) to register `RuntimeNodeInstrumentation` with your OpenTelemetry SDK and configure a metrics reader and exporter. The package collects metrics; it does not configure export to Application Insights by itself. If your distro or auto-instrumentation setup already enables this instrumentation, do not register it again or start a second SDK.
+
+This is not a drop-in replacement for the `applicationinsights-native-metrics` API. Review the supported Node.js versions and metric names, units, and aggregation behavior, and update dashboards and alerts as needed.
+
+## Migrate to Microsoft OpenTelemetry Distro
+
+Use the Microsoft OpenTelemetry Distro to collect telemetry and send it to Azure Monitor Application Insights. The `applicationinsights-native-metrics` package is not required by the distro.
+
+1. Review the [Application Insights migration guidance](https://learn.microsoft.com/en-us/azure/azure-monitor/app/migrate-to-opentelemetry?tabs=nodejs) for changes to instrumentation, configuration, and available telemetry. The distro is not a drop-in replacement for this native metrics add-on.
+2. Remove `applicationinsights-native-metrics` if it is a direct dependency, and install the distro:
+
+   ```sh
+   npm uninstall applicationinsights-native-metrics
+   npm install @microsoft/opentelemetry
+   ```
+
+3. Follow the [Node.js setup instructions](https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable?tabs=nodejs) to initialize the distro before loading application libraries and configure your Application Insights connection string. Replace the previous Application Insights SDK initialization rather than running both instrumentation paths together.
+4. Verify the telemetry your application relies on before deploying the migration. Do not assume that all native metrics have equivalent replacements.
+
+Applications already using the Azure Monitor OpenTelemetry Distro do not need to switch distros as part of this repository's retirement.
 
 ## Contributing
 
-This project welcomes contributions and suggestions. Most contributions require you to
+This repository is being prepared for archival and is no longer accepting new contributions. See [SUPPORT.md](SUPPORT.md) for migration and support resources.
+
+The following contribution requirements are retained for reference. Most contributions require you to
 agree to a Contributor License Agreement (CLA) declaring that you have the right to,
 and actually do, grant us the rights to use your contribution. For details, visit
 https://cla.microsoft.com.
